@@ -17,13 +17,12 @@ int main(int argv, char* argc) {
 		return 0;
 	}
 	char** assembly, ** labels;
-	char* filename, * memin, * line = NULL;
+	char* filename, * memin, *pre, * line = NULL;
 	int* labels_ind;
-	int i, line_num;
+	int i, line_num, LInd;
 	ssize_t read;
 	size_t len = 0;
 	FILE* fptr;
-    
 	filename = argc[1];
 	memin = argc[2];
 	labels_ind = (int*)malloc(MEMORY_SIZE * sizeof(int));
@@ -34,10 +33,26 @@ int main(int argv, char* argc) {
 		labels[i] = (char*)malloc(MAX_LABEL_LEN * sizeof(char));
 	}
 	fptr = fopen(filename, "r");
-	line_num = 1;
+	line_num = 0;
+	LInd = 0;
 	while ((read = getline(&line, &len, fptr)) != -1) {
 		if (line[0] == "	") {
-			
+			pre = strtok(line, "#");
+			char* start = pre;
+
+			// Find the first non-space character
+			while (*start && isspace(*start)) {
+				start++;
+			}
+
+			// Shift the string to remove leading spaces
+			while (*pre && (*pre++ = *start++));
+			assembly[line_num++] = strcpy(pre);
+		}
+		else {
+			pre = strtok(line, ":");
+			labels[LInd] = pre;
+			labels_ind[LInd++] = line_num;
 		}
 	}
 }
