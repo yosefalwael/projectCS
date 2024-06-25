@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,11 +10,15 @@
 #define MEMORY_SIZE 4096
 #define MAX_LINE_LEN 500
 #define MAX_LABEL_LEN 50
-int main(int argv, char* argc) {
+int main(int argv, char* argc[]) {
+	printf("%d",argv);
+	
 	if (argv != 3) {
 		printf("not valid args");
 		return 0;
 	}
+	
+	printf("%s%s",argc[1],argc[2]);
 	char** assembly, ** labels;
 	char* filename, * memin, *pre, * line = NULL;
 	int* labels_ind;
@@ -24,8 +26,13 @@ int main(int argv, char* argc) {
 	ssize_t read;
 	size_t len = 0;
 	FILE* fptr;
+	
 	filename = argc[1];
 	memin = argc[2];
+	
+	//filename = "input_1.txt";
+	//memin = "memory.txt";
+	
 	labels_ind = (int*)malloc(MEMORY_SIZE * sizeof(int));
 	labels = (char**)malloc(MEMORY_SIZE * sizeof(char*));
 	assembly = (char**)malloc(MEMORY_SIZE * sizeof(char*));
@@ -37,23 +44,19 @@ int main(int argv, char* argc) {
 	line_num = 0;
 	LInd = 0;
 	while ((read = getline(&line, &len, fptr)) != -1) {
-		if (line[0] == '    ') {  
-			pre = strtok(line, "#");//here we are in normal assembly instruction and we are trying adding it to the array 
+		if (line[0] == '	') {
+			pre = strtok(line, "#");
 			char* start = pre;
-
-			// Find the first non-space character
-			while (*start && isspace(*start)) {
-				start++;
-			}
-
-			// Shift the string to remove leading spaces
-			while (*pre && (*pre++ = *start++));
-			assembly[line_num++] = strcpy(pre);
+			strcpy(assembly[line_num++],pre);
 		}
 		else {
 			pre = strtok(line, ":");
-			labels[LInd] = pre;
+			strcpy(labels[LInd],pre);
 			labels_ind[LInd++] = line_num;
 		}
 	}
-}  
+	fclose(fptr);
+	for (i = 0;i < 100;i++) {
+		printf("%s\n", assembly[i]);
+	}
+}
