@@ -47,7 +47,7 @@ int main(int argv, char* argc) {
 
 			// Shift the string to remove leading spaces
 			while (*pre && (*pre++ = *start++));
-			assembly[line_num++] = strcpy(pre);
+			strcpy(assembly[line_num++],pre);
 		}
 		else {
 			pre = strtok(line, ":");
@@ -55,5 +55,7 @@ int main(int argv, char* argc) {
 			labels_ind[LInd++] = line_num;
 		}
 	}
-}
+	fclose(fptr);
 
+
+}
