@@ -1,4 +1,3 @@
-#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -8,9 +7,9 @@
 
 //defining
 
-#define MEMORY_SIZE 4096
-#define MAX_LINE_LEN 500
-#define MAX_LABEL_LEN 50
+#define MEMORY_SIZE 4096;
+#define MAX_LINE_LEN 500;
+#define MAX_LABEL_LEN 50;
 int main(int argv, char* argc) {
 	if (argv != 3) {
 		printf("not valid args");
@@ -47,7 +46,7 @@ int main(int argv, char* argc) {
 
 			// Shift the string to remove leading spaces
 			while (*pre && (*pre++ = *start++));
-			strcpy(assembly[line_num++],pre);
+			assembly[line_num++] = strcpy(pre);
 		}
 		else {
 			pre = strtok(line, ":");
@@ -56,6 +55,8 @@ int main(int argv, char* argc) {
 		}
 	}
 	fclose(fptr);
-
-
+	for (i = 0;i < MEMORY_SIZE;i++) {
+		printf("%s\n", assembly[i]);
+	}
 }
+
