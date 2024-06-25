@@ -8,9 +8,9 @@
 
 //defining
 
-#define MEMORY_SIZE 4096;
-#define MAX_LINE_LEN 500;
-#define MAX_LABEL_LEN 50;
+#define MEMORY_SIZE 4096
+#define MAX_LINE_LEN 500
+#define MAX_LABEL_LEN 50
 int main(int argv, char* argc) {
 	if (argv != 3) {
 		printf("not valid args");
@@ -22,7 +22,7 @@ int main(int argv, char* argc) {
 	int i, line_num;
 	ssize_t read;
 	size_t len = 0;
-	FILE* fptr;
+	FILE* fptr;  
 	filename = argc[1];
 	memin = argc[2];
 	labels_ind = (int*)malloc(MEMORY_SIZE * sizeof(int));
