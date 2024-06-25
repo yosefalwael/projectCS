@@ -22,7 +22,7 @@ int main(int argv, char* argc) {
 	int i, line_num;
 	ssize_t read;
 	size_t len = 0;
-	FILE* fptr;  
+	FILE* fptr;
 	filename = argc[1];
 	memin = argc[2];
 	labels_ind = (int*)malloc(MEMORY_SIZE * sizeof(int));
